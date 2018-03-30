@@ -1,50 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Javascript Practises</title>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+  <title>Ajax Sandbox</title>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col s12">
-                <div class="card" id="main">
-                    <div class="card-content">
-                        <span class="card-title">Task List</span>
-                        <div class="row">
-                            <form action="" id="task-form">
-                                <div class="input-field col s12">
-                                    <input type="text" name="task" id="task">
-                                    <label for="task">Task Name</label>
-                                    <input type="submit" value="Add task" class="btn">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="card-action">
-                        <h5 id="title-task">Tasks</h5>
-                        <div class="input-field col s12">
-                                <input type="text" name="fiter" id="fiter">
-                                <label for="fiter">New Task</label>
-                        </div>
-                        <ul class="collection"></ul>
-                        <div href="#" class="clear-tasks btn black">Clear Tasks</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-        <!-- Compiled and minified JavaScript -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-    <script src="app.js"></script>
+  <div class="container">
+    <button id="button" class="button button-primary">Get Data</button>
+    <br><br>
+    <div id="output"></div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
