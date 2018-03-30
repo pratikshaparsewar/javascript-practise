@@ -1,77 +1,63 @@
+document.getElementById('button1').addEventListener('click', loadCustomer);
 
-// Define UI Vars
-const form = document.querySelector('#task-form');
-const taskList = document.querySelector('.collection');
-const clearBtn = document.querySelector('.clear-tasks');
-const filter = document.querySelector('#filter');
-const taskInput = document.querySelector('#task');
+document.getElementById('button2').addEventListener('click', loadCustomers);
 
-// load event listensers
-loadEventListeners()
+// Load Single Customer
+function loadCustomer(e) {
+  const xhr = new XMLHttpRequest();
 
-function loadEventListeners() {
-    form.addEventListener('submit', addTask);
+  xhr.open('GET', 'customer.json', true);
 
-    taskList.addEventListener('click' , removeTask);
-    clearBtn.addEventListener('click', clearTasks);
-    filter.addEventListener('keyup',filterTasks);
-}
+  xhr.onload = function(){
+    if(this.status === 200) {
+      // console.log(this.responseText);
 
-// Add Task
-function addTask(e) {
-    if(taskInput.value === '') {
-      alert('Add a task');
+      const customer = JSON.parse(this.responseText);
+      const output = `
+        <ul>
+          <li>ID: ${customer.id}</li>
+          <li>Name: ${customer.name}</li>
+          <li>Company: ${customer.company}</li>
+          <li>Phone: ${customer.phone}</li>
+        </ul>
+      `;
+
+      document.getElementById('customer').innerHTML = output;
     }
-  
-    // Create li element
-    const li = document.createElement('li');
-    // Add class
-    li.className = 'collection-item';
-    // Create text node and append to li
-    li.appendChild(document.createTextNode(taskInput.value));
-    // Create new link element
-    const link = document.createElement('a');
-    // Add class
-    link.className = 'delete-item secondary-content';
-    // Add icon html
-    link.innerHTML = '<i class="fa fa-remove"></i>';
-    // Append the link to li
-    li.appendChild(link);
-  
-    // Append li to ul
-    taskList.appendChild(li);
-  
-    // Clear input
-    taskInput.value = '';
-  
-    e.preventDefault();
   }
 
- function removeTask(e) {
-   if(e.target.parentElement.classList.contains('delete-item'))
-   {
-      if(confirm("are you sure?")) {
-    e.target.parentElement.parentElement.remove();
+  xhr.send();
 }
-   }
-  
- }
 
-function clearTasks() {
-    taskList.innerHTML = '';
-}
- 
-function filterTasks(e) {
-const text = e.target.value.toLowercase();
-document.querySelectorAll('collection-item').forEach(
-    function(task) {
-        const item = task.firstChild.textContent;
-        if(item.toLowerCase().indexOf(text) != -1) {
-            task.style.display = 'blcok';
-        }
-        else {
-            task.style.display = 'none';
-            }
+
+// Load Customers
+function loadCustomers(e) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.open('GET', 'customers.json', true);
+
+  xhr.onload = function(){
+    if(this.status === 200) {
+      // console.log(this.responseText);
+
+      const customers = JSON.parse(this.responseText);
+
+      let output = '';
+
+      customers.forEach(function(customer){
+        output += `
+        <ul>
+          <li>ID: ${customer.id}</li>
+          <li>Name: ${customer.name}</li>
+          <li>Company: ${customer.company}</li>
+          <li>Phone: ${customer.phone}</li>
+        </ul>
+      `;
+      });
+
+      document.getElementById('customers').innerHTML = output;
     }
-);
+  }
+
+  xhr.send();
 }
