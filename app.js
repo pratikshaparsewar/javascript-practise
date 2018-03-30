@@ -1,51 +1,29 @@
-document.getElementById('button').addEventListener('click', loadData);
+document.getElementById("submit").addEventListener('click',loadJokes);
 
-function loadData() {
-  // Create an XHR Object
-  const xhr = new XMLHttpRequest();
+function loadJokes(e) {
+    const number = document.getElementById("number").value;
+    console.log(number);
 
-  // OPEN
-  xhr.open('GET', 'data.txt', true);
+    //we are using http://www.icndb.com/ website for external api
 
-  // console.log('READYSTATE', xhr.readyState);
-
-  // Optional - Used for spinners/loaders
-  xhr.onprogress = function(){
-    console.log('READYSTATE', xhr.readyState);
-  }
-
-  xhr.onload = function(){
-    console.log('READYSTATE', xhr.readyState);
-    if(this.status === 200) {
-      // console.log(this.responseText);
-      document.getElementById('output').innerHTML = `<h1>${this.responseText}</h1>`;
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET",`http://api.icndb.com/jokes/random/${number}`,true);
+   
+    xhr.onload = function(e) {
+        if (this.status == 200) {
+            const respose = JSON.parse(this.responseText);
+            let output = '';
+            if(this.responseType === 'success') {
+              response.value.forEach(function(joke){
+                output += `<li>${joke.joke}</li>`
+              });
+            }
+            else {
+                output += '<li>Something went wrong</li>'
+            }
+            document.querySelector('.jokes').innerHTML = output;
+        } 
     }
-  }
-
-  // xhr.onreadystatechange = function() {
-  //   console.log('READYSTATE', xhr.readyState);
-  //   if(this.status === 200 && this.readyState === 4){
-  //     console.log(this.responseText);
-  //   }
-  // }
-
-  xhr.onerror = function() {
-    console.log('Request error...');
-  }
-
-  xhr.send();
-
-
-    // readyState Values
-    // 0: request not initialized 
-    // 1: server connection established
-    // 2: request received 
-    // 3: processing request 
-    // 4: request finished and response is ready
-
-
-  // HTTP Statuses
-  // 200: "OK"
-  // 403: "Forbidden"
-  // 404: "Not Found"
+    xhr.send();
+    e.preventDefault();
 }
